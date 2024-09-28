@@ -98,42 +98,48 @@ float arg() {
   if (parsed.size() == 0)
     throw ParseError("Can not parse argument");
 
-  switch (parsed[0]) {
-    case 'm':
-    case 'M': {
-      unsigned int c = std::stoi(parsed.substr(1));
+  try {
+    switch (parsed[0]) {
+      case 'm':
+      case 'M': {
+        unsigned int c = std::stoi(parsed.substr(1));
 
-      if (c < 0 || c > _size - 1)
-        throw ParseError("Out of range memory");
+        if (c < 0 || c > _size - 1)
+          throw ParseError("Out of range memory");
 
-      return memory[c];
-    }
+        return memory[c];
+      }
 
-    case '0': {
-      if (parsed.size() > 1) {
-        switch (parsed[1]) {
-          case 'x':
-          case 'X': {
-            if (parsed.size() > 2)
-              return std::stoi(parsed.substr(2), nullptr, 16);
-          }
+      case '0': {
+        if (parsed.size() > 1) {
+          switch (parsed[1]) {
+            case 'x':
+            case 'X': {
+              if (parsed.size() > 2)
+                return std::stoi(parsed.substr(2), nullptr, 16);
+            }
 
-          case 'b':
-          case 'B': {
-            if (parsed.size() > 2)
-              return std::stoi(parsed.substr(2), nullptr, 2);
-          }
+            case 'b':
+            case 'B': {
+              if (parsed.size() > 2)
+                return std::stoi(parsed.substr(2), nullptr, 2);
+            }
 
-          default: {
-            return std::stoi(parsed.substr(1), nullptr, 8);
+            default: {
+              return std::stoi(parsed.substr(1), nullptr, 8);
+            }
           }
         }
       }
-    }
 
-    default: {
-      return std::stof(parsed);
+      default: {
+        return std::stof(parsed);
+      }
     }
+  } catch (std::invalid_argument) {
+    throw ParseError("Failed parse argument");
+  } catch (...) {
+    throw;
   }
 }
 
