@@ -46,88 +46,41 @@ class ParseError : public std::exception {
 std::map<string, std::function<void()>>
     commands = {
         // Main
-        {":", []() {
-           move(arg());
-         }},
-        {"=", []() {
-           write(arg());
-         }},
+        {":", []() { move(arg()); }},
+        {"=", []() { write(arg()); }},
 
         // Base
-        {"+", []() {
-           write(read() + arg());
-         }},
-        {"-", []() {
-           write(read() - arg());
-         }},
-        {"*", []() {
-           write(read() * arg());
-         }},
-        {"/", []() {
-           write(read() / arg());
-         }},
-        {"^", []() {
-           write(std::pow(read(), arg()));
-         }},
-        {"%", []() {
-           write(std::fmod(read(), arg()));
-         }},
+        {"+", []() { write(read() + arg()); }},
+        {"-", []() { write(read() - arg()); }},
+        {"*", []() { write(read() * arg()); }},
+        {"/", []() { write(read() / arg()); }},
+        {"^", []() { write(std::pow(read(), arg())); }},
+        {"%", []() { write(std::fmod(read(), arg())); }},
 
         // Math
-        {"sin", []() {
-           write(std::sin(read()));
-         }},
-        {"cos", []() {
-           write(std::cos(read()));
-         }},
-        {"tan", []() {
-           write(std::tan(read()));
-         }},
-        {"atan", []() {
-           write(std::atan(read()));
-         }},
-        {"rand", []() {
-           write(std::rand());
-         }},
+        {"sin", []() { write(std::sin(read())); }},
+        {"cos", []() { write(std::cos(read())); }},
+        {"tan", []() { write(std::tan(read())); }},
+        {"atan", []() { write(std::atan(read())); }},
+        {"rand", []() { write(std::rand()); }},
 
         // Condition
-        {"lt", []() {
-           if (read() >= arg()) skip();
-         }},
-        {"gt", []() {
-           if (read() <= arg()) skip();
-         }},
-        {"lte", []() {
-           if (read() > arg()) skip();
-         }},
-        {"gte", []() {
-           if (read() < arg()) skip();
-         }},
-        {"eq", []() {
-           if (read() != arg()) skip();
-         }},
+        {"lt", []() { if (read() >= arg()) skip(); }},
+        {"gt", []() { if (read() <= arg()) skip(); }},
+        {"lte", []() { if (read() > arg()) skip(); }},
+        {"gte", []() { if (read() < arg()) skip(); }},
+        {"eq", []() { if (read() != arg()) skip(); }},
 
         // Processor
-        {"(", []() {
-           label(arg());
-         }},
-        {")", []() {
-           golabel(arg());
-         }},
+        {"(", []() { label(arg()); }},
+        {")", []() { golabel(arg()); }},
         {"dump", []() {
-           for (int i = 0; i < _size; i++) {
+           for (int i = 0; i < _size; i++)
              std::cout << memory[i] << " ";
-           }
            std::cout << std::endl;
          }},
-        {"exit", []() {
-           exit(0);
-         }},
+        {"exit", []() { exit(0); }},
 };
-
-float read() {
-  return memory[cursor];
-}
 
 float arg() {
   string parsed;
@@ -182,6 +135,10 @@ float arg() {
       return std::stof(parsed);
     }
   }
+}
+
+float read() {
+  return memory[cursor];
 }
 
 void write(float value) {
