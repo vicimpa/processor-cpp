@@ -1,2 +1,2 @@
 all:
-	g++ -o dist/main ./main.cpp
+	g++ -o dist/main src/main.cpp
