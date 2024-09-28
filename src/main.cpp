@@ -114,6 +114,12 @@ std::map<string, std::function<void()>>
         {")", []() {
            golabel(arg());
          }},
+        {"dump", []() {
+           for (int i = 0; i < _size; i++) {
+             std::cout << memory[i] << " ";
+           }
+           std::cout << std::endl;
+         }},
         {"exit", []() {
            exit(0);
          }},
