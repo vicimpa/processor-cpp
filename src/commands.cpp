@@ -29,6 +29,9 @@ void initializeCommands() {
       {"tan", []() { write(std::tan(read())); }},
       {"atan", []() { write(std::atan(read())); }},
       {"rand", []() { write(std::rand()); }},
+      {"round", []() { write(std::round(read())); }},
+      {"floor", []() { write(std::floor(read())); }},
+      {"ceil", []() { write(std::ceil(read())); }},
 
       // Condition
       {"lt", []() { if (read() >= arg()) skip(); }},
