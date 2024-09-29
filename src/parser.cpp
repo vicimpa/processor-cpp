@@ -95,9 +95,12 @@ void skip() {
 }
 
 void label(float anchor) {
-  labels.insert({anchor, line});
+  labels[anchor] = line;
 }
 
 void golabel(float anchor) {
+  if (!labels.count(anchor))
+    throw ParseError("No find label");
+
   line = labels.at(anchor);
 }
