@@ -39,6 +39,7 @@ void initializeCommands() {
       {"lte", []() { if (read() > arg()) skip(); }},
       {"gte", []() { if (read() < arg()) skip(); }},
       {"eq", []() { if (read() != arg()) skip(); }},
+      {"neq", []() { if (read() == arg()) skip(); }},
 
       // Processor
       {"(", []() { label(arg()); }},
