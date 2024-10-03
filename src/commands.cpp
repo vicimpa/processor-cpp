@@ -20,6 +20,11 @@ void initializeCommands() {
       {"-", []() { write(read() - arg()); }},
       {"*", []() { write(read() * arg()); }},
       {"/", []() { write(read() / arg()); }},
+      {"&", []() { write((int)read() & (int)arg()); }},
+      {"|", []() { write((int)read() | (int)arg()); }},
+      {"~", []() { write(~(int)read()); }},
+      {"<", []() { write((int)read() << (int)arg()); }},
+      {">", []() { write((int)read() >> (int)arg()); }},
       {"^", []() { write(std::pow(read(), arg())); }},
       {"%", []() { write(std::fmod(read(), arg())); }},
 

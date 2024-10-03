@@ -30,6 +30,7 @@ void trim(std::string &s) {
 }
 
 int main(int argc, char *args[]) {
+  std::srand(std::time(nullptr));
   initializeCommands();
 
   if (argc > 1) {
